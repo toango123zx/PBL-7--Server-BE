@@ -1,0 +1,22 @@
+## Install package project
+```
+$ npm install
+```
+
+## Create DB
+User `PrismaORM`
+Database `Postgresql`
+
+```
+$ npx prisma db push
+```
+
+## Run app
+
+```
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+``

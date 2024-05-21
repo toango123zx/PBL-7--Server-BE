@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String     @id @default(cuid())
+  name        String
+  email       String     @unique
+  dateOfBirth DateTime
+  username    String     @unique
+  password    String
+  gender      Boolean
+  createdAt   DateTime   @default(now())
+  status      Boolean    @default(true)
+  roleId      String
+  Role        Role       @relation(fields: [roleId], references: [id])
+  Room        ChatRoom[]
+  Messenge    Messenge[]
+
+  @@map("user")
+}
+
+model Role {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  description String
+  createdAt   DateTime     @default(now())
+  status      Boolean      @default(true)
+  User        User[]
+  Permission  Permission[]
+
+  @@map("role")
+}
+
+model Permission {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String
+  createdAt   DateTime @default(now())
+  status      Boolean  @default(true)
+  Role        Role[]
+
+  @@map("permission")
+}
+
+model ChatRoom {
+  id        String     @id @default(cuid())
+  name      String
+  createdAt DateTime   @default(now())
+  status    Boolean    @default(true)
+  Messenge  Messenge[]
+  User      User       @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@map("chatRoom")
+}
+
+model Messenge {
+  id         String   @id @default(cuid())
+  content    String
+  createdAt  DateTime @default(now())
+  status     Boolean  @default(true)
+  userId     String
+  User       User     @relation(fields: [userId], references: [id])
+  chatRoomID String
+  ChatRoom   ChatRoom @relation(fields: [chatRoomID], references: [id])
+
+  @@map("messenge")
+}
