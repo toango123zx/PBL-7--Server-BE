@@ -14,31 +14,33 @@ datasource db {
 }
 
 model User {
-  id          String     @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
-  email       String     @unique
+  email       String   @unique
   dateOfBirth DateTime
-  username    String     @unique
+  username    String   @unique
   password    String
   gender      Boolean
-  createdAt   DateTime   @default(now())
-  status      Boolean    @default(true)
+  createdAt   DateTime @default(now())
+  status      Boolean  @default(true)
   roleId      String
-  Role        Role       @relation(fields: [roleId], references: [id])
-  Room        ChatRoom[]
-  Messenge    Messenge[]
+
+  Role Role @relation(fields: [roleId], references: [id])
+
+  FeadBack FeedBack[]
 
   @@map("user")
 }
 
 model Role {
-  id          String       @id @default(cuid())
-  name        String       @unique
+  id          String   @id @default(cuid())
+  name        String   @unique
   description String
-  createdAt   DateTime     @default(now())
-  status      Boolean      @default(true)
-  User        User[]
-  Permission  Permission[]
+  createdAt   DateTime @default(now())
+  status      Boolean  @default(true)
+
+  User       User[]
+  Permission Permission[]
 
   @@map("role")
 }
@@ -49,32 +51,96 @@ model Permission {
   description String
   createdAt   DateTime @default(now())
   status      Boolean  @default(true)
-  Role        Role[]
+
+  Role Role[]
 
   @@map("permission")
 }
 
-model ChatRoom {
-  id        String     @id @default(cuid())
-  name      String
-  createdAt DateTime   @default(now())
-  status    Boolean    @default(true)
-  Messenge  Messenge[]
-  User      User       @relation(fields: [userId], references: [id])
-  userId    String
+model Source {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  status Boolean @default(true)
 
-  @@map("chatRoom")
+  category Category[]
+
+  @@map("source")
 }
 
-model Messenge {
-  id         String   @id @default(cuid())
-  content    String
-  createdAt  DateTime @default(now())
-  status     Boolean  @default(true)
-  userId     String
-  User       User     @relation(fields: [userId], references: [id])
-  chatRoomID String
-  ChatRoom   ChatRoom @relation(fields: [chatRoomID], references: [id])
+model Category {
+  id       String  @id @default(cuid())
+  name     String  @unique
+  status   Boolean @default(true)
+  sourceId String
+  Source   Source  @relation(fields: [sourceId], references: [id])
 
-  @@map("messenge")
+  News          News[]
+  RequestStatic RequestStatic[]
+
+  @@map("category")
+}
+
+model RequestStatic {
+  id         String   @id @default(cuid())
+  name       String   @unique
+  date       DateTime
+  count      Int      @default(0)
+  status     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  categoryId String
+  Category   Category @relation(fields: [categoryId], references: [id])
+
+  @@map("request_static")
+}
+
+model News {
+  id            String   @id @default(cuid())
+  summary       String
+  Date          DateTime @default(now())
+  url           String
+  redirectCount Int      @default(0)
+  status        Boolean  @default(true)
+  categoryId    String
+  Category      Category @relation(fields: [categoryId], references: [id])
+
+  FeddBack FeedBack[]
+
+  @@map("news")
+}
+
+model FeedBack {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  status    Boolean  @default(true)
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+  newsId    String
+  News      News     @relation(fields: [newsId], references: [id])
+
+  @@map("feedback")
+}
+
+model DataVersion {
+  id             String       @id @default(cuid())
+  date           DateTime     @default(now())
+  count          Int          @default(0)
+  modelVersionId String
+  ModelVersion   ModelVersion @relation(fields: [modelVersionId], references: [id])
+
+  @@map("data_version")
+}
+
+model ModelVersion {
+  id     String   @id @default(cuid())
+  name   String   @unique
+  date   DateTime @default(now())
+  rouge1 Float
+  rouge2 Float
+  rougeL Float
+  status Boolean  @default(true)
+
+  dataVersion DataVersion[]
+
+  @@map("model_version")
 }
