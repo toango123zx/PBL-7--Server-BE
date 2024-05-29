@@ -1,4 +1,4 @@
-const { prisma } = require('../database');
+const { prisma } = require('../database')
 export const getUser = async (id_user, username, email) => {
     try {
         let __properties = [
@@ -10,7 +10,8 @@ export const getUser = async (id_user, username, email) => {
             },
             {
                 email: email,
-            }];
+            },
+        ]
         return await prisma.user.findFirst({
             select: {
                 id: true,
@@ -22,7 +23,7 @@ export const getUser = async (id_user, username, email) => {
                 Role: {
                     select: {
                         name: true,
-                    }
+                    },
                 },
                 status: true,
             },
@@ -31,19 +32,19 @@ export const getUser = async (id_user, username, email) => {
                 NOT: {
                     status: false,
                 },
-            }
-        });
+            },
+        })
     } catch (e) {
-        return false;
-    };
-};
+        return false
+    }
+}
 
 export const createUser = async (user) => {
     try {
         return await prisma.user.create({
             data: user,
-        });
+        })
     } catch (e) {
-        return false;
-    };
+        return false
+    }
 }

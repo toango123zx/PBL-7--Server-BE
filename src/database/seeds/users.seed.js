@@ -1,47 +1,47 @@
-const { prisma } = require('../index');
+const { prisma } = require('../index')
 
 export const usersSeed = async () => {
     const users = [
         {
-            username: "admin",
-            password: "$2b$10$MGWBzXIAmFrOrm1KgaOr8OAg6j1YWrVtq7n.PfQDvMBwbQpFy.gMy", //1
-            name: "admin",
+            username: 'admin',
+            password: '$2b$10$MGWBzXIAmFrOrm1KgaOr8OAg6j1YWrVtq7n.PfQDvMBwbQpFy.gMy', //1
+            name: 'admin',
             dateOfBirth: new Date(),
             gender: true,
-            email: "admin@gmail.com",
+            email: 'admin@gmail.com',
             Role: {
                 connect: {
-                    name: "admin"
-                }
-            }
+                    name: 'admin',
+                },
+            },
         },
         {
-            username: "user",
-            password: "$2b$10$MGWBzXIAmFrOrm1KgaOr8OAg6j1YWrVtq7n.PfQDvMBwbQpFy.gMy", //1
-            name: "user",
+            username: 'user',
+            password: '$2b$10$MGWBzXIAmFrOrm1KgaOr8OAg6j1YWrVtq7n.PfQDvMBwbQpFy.gMy', //1
+            name: 'user',
             dateOfBirth: new Date(),
             gender: true,
-            email: "user@gmail.com",
+            email: 'user@gmail.com',
             Role: {
                 connect: {
-                    name: "user"
-                }
-            }
+                    name: 'user',
+                },
+            },
         },
         {
-            username: "chatbot version 1.0",
-            password: "$2b$10$MGWBzXIAmFrOrm1KgaOr8OAg6j1YWrVtq7n.PfQDvMBwbQpFy.gMy", //1
-            name: "chatbot",
-            dateOfBirth: new Date,
+            username: 'chatbot version 1.0',
+            password: '$2b$10$MGWBzXIAmFrOrm1KgaOr8OAg6j1YWrVtq7n.PfQDvMBwbQpFy.gMy', //1
+            name: 'chatbot',
+            dateOfBirth: new Date(),
             gender: true,
-            email: "chatbot@gmail.com",
+            email: 'chatbot@gmail.com',
             Role: {
                 connect: {
-                    name: "chatbot"
-                }
-            }
-        }
-    ];
+                    name: 'chatbot',
+                },
+            },
+        },
+    ]
 
     for (let i = 1; i < 400; i++) {
         users.push(
@@ -54,9 +54,9 @@ export const usersSeed = async () => {
                 email: `admin${i}@gmail.com`,
                 Role: {
                     connect: {
-                        name: `admin`
-                    }
-                }
+                        name: `admin`,
+                    },
+                },
             },
             {
                 username: `user${i}`,
@@ -67,15 +67,16 @@ export const usersSeed = async () => {
                 email: `user${i}@gmail.com`,
                 Role: {
                     connect: {
-                        name: `user`
-                    }
-                }
-            });
-    };
+                        name: `user`,
+                    },
+                },
+            },
+        )
+    }
     for (let user of users) {
         await prisma.user.create({
-            data: user
-        });
-    };
-    console.log("Users seeded successfully");
-};
+            data: user,
+        })
+    }
+    console.log('Users seeded successfully')
+}

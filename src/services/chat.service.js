@@ -1,16 +1,16 @@
-const { prisma } = require('../database//index');
+const { prisma } = require('../database//index')
 
 export const createRoom = async (idUser) => {
     return await prisma.chatRoom.create({
         data: {
-            name: "New Chat",
+            name: 'New Chat',
             User: {
                 connect: {
-                    id: String(idUser)
-                }
-            }
-        }
-    });
+                    id: String(idUser),
+                },
+            },
+        },
+    })
 }
 
 export const createMessage = async (idRoom, message) => {
@@ -19,9 +19,9 @@ export const createMessage = async (idRoom, message) => {
             content: String(message),
             ChatRoom: {
                 connect: {
-                    id: String(idRoom)
-                }
-            }
-        }
+                    id: String(idRoom),
+                },
+            },
+        },
     })
 }

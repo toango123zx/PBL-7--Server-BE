@@ -1,87 +1,97 @@
-const { prisma } = require('../index');
+const { prisma } = require('../index')
 
 export const permissionsSeed = async () => {
     const permissions = [
         {
-            name: "viewMyProfile",
-            description: "View my profile",
+            name: 'viewMyProfile',
+            description: 'View my profile',
             Role: {
                 connect: [
                     {
-                        name: "admin"
-    
+                        name: 'admin',
                     },
                     {
-                        name: "user"
-                    }
-                ]
-            }
-        },    
-        {   
-            name: "viewListUser",
-            description: "View all users",
-            Role: {
-                connect: [{
-                    name: "admin"
-                }]
-            }
+                        name: 'user',
+                    },
+                ],
+            },
         },
         {
-            name: "searchUser",
-            description: "Search users",
+            name: 'viewListUser',
+            description: 'View all users',
             Role: {
-                connect: [{
-                    name: "admin"
-                }]
-            }
+                connect: [
+                    {
+                        name: 'admin',
+                    },
+                ],
+            },
         },
         {
-            name: "requestMessage",
-            description: "Chat with model NLP",
+            name: 'searchUser',
+            description: 'Search users',
             Role: {
-                connect: [{
-                    name: "admin"
-                },
-                {
-                    name: "user"
-    
-                }]
-            }
+                connect: [
+                    {
+                        name: 'admin',
+                    },
+                ],
+            },
         },
         {
-            name: "LoginAdmin",
-            description: "Login for admin",
+            name: 'requestMessage',
+            description: 'Chat with model NLP',
             Role: {
-                connect: [{
-                    name: "admin"
-                }]
-            }
+                connect: [
+                    {
+                        name: 'admin',
+                    },
+                    {
+                        name: 'user',
+                    },
+                ],
+            },
         },
         {
-            name: "LoginUser",
-            description: "Login for user",
+            name: 'LoginAdmin',
+            description: 'Login for admin',
             Role: {
-                connect: [{
-                    name: "user"
-                }]
-            }
+                connect: [
+                    {
+                        name: 'admin',
+                    },
+                ],
+            },
         },
         {
-            name: "responseMessage",
-            description: "Response to user",
+            name: 'LoginUser',
+            description: 'Login for user',
             Role: {
-                connect: [{
-                    name: "chatbot"
-                }]
-            }
-        }
-    ];
+                connect: [
+                    {
+                        name: 'user',
+                    },
+                ],
+            },
+        },
+        {
+            name: 'responseMessage',
+            description: 'Response to user',
+            Role: {
+                connect: [
+                    {
+                        name: 'chatbot',
+                    },
+                ],
+            },
+        },
+    ]
 
     for (let permission of permissions) {
         await prisma.permission.create({
-            data: permission
-        });
-    };
-    
-    console.log("Permissions seeded successfully");
-};
+            data: permission,
+        })
+    }
+
+    console.log('Permissions seeded successfully')
+}
