@@ -3,10 +3,10 @@ import { prisma } from '../index'
 export const sourcesSeed = async () => {
     const sources = [
         {
-            name: 'vtv',
+            name: 'VTV',
         },
         {
-            name: 'tuoitre',
+            name: 'TuoiTre',
         },
     ]
 

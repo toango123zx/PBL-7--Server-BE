@@ -3,11 +3,12 @@ import express from 'express'
 import logger from 'morgan'
 import { fileURLToPath } from 'url'
 import path, { dirname } from 'path'
+import cors from 'cors'
 
 import route from './routers'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.set('views', path.join(dirname(fileURLToPath(import.meta.url)), 'views'))
 app.set('view engine', 'jade')
@@ -18,6 +19,11 @@ app.use(logger('combined'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(dirname(fileURLToPath(import.meta.url)), 'public')))
+app.use(
+    cors({
+        origin: ['http://localhost:3000'],
+    }),
+)
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World!')
