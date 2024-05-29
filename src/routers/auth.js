@@ -1,6 +1,6 @@
-const express = require('express')
-const { authController } = require('../controllers')
-const { authValidation } = require('../validation')
+import express from 'express'
+import { authController } from '../controllers'
+import { authValidation } from '../validation'
 
 const authRouter = express.Router()
 
@@ -13,4 +13,4 @@ authRouter.post(
 authRouter.post('/login', authController.login)
 authRouter.get('/seed-data', authController.seedData)
 
-module.exports = authRouter
+export default authRouter

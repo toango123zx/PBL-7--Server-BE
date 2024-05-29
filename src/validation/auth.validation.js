@@ -1,6 +1,6 @@
 import { userService } from '../services'
 
-const Joi = require('joi')
+import Joi from 'joi'
 
 const userSchema = Joi.object({
     username: Joi.string().required().label('username error').messages({

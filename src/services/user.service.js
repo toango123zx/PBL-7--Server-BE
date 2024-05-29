@@ -1,4 +1,5 @@
-const { prisma } = require('../database')
+import { prisma } from '../database'
+
 export const getUser = async (id_user, username, email) => {
     try {
         let __properties = [

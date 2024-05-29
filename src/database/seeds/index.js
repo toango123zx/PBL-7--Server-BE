@@ -2,7 +2,7 @@ import { rolesSeed } from './roles.seed'
 import { permissionsSeed } from './permissions.seed'
 import { usersSeed } from './users.seed'
 
-const { prisma } = require('../index')
+import { prisma } from '../index'
 
 export const main = async () => {
     await rolesSeed()

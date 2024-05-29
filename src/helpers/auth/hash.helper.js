@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+import crypto from 'crypto'
 
 export const hashPassword = (input) => {
     const __salt = crypto.randomBytes(16).toString('hex')

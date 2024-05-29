@@ -1,9 +1,7 @@
-const authRouter = require('./auth')
-const chatRouter = require('./chat')
+import authRouter from './auth'
+import chatRouter from './chat'
 
-function route(app) {
+export default function route(app) {
     app.use('/', authRouter)
     app.use('/chat', chatRouter)
 }
-
-module.exports = route
