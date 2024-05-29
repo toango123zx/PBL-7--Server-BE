@@ -6,7 +6,7 @@ export const categoriesSeed = async () => {
             name: 'Kinh tế',
             Source: {
                 connect: {
-                    name: 'vtv',
+                    name: 'VTV',
                 },
             },
         },
@@ -14,7 +14,7 @@ export const categoriesSeed = async () => {
             name: 'Xã hội',
             Source: {
                 connect: {
-                    name: 'vtv',
+                    name: 'VTV',
                 },
             },
         },
@@ -22,7 +22,7 @@ export const categoriesSeed = async () => {
             name: 'Kinh doanh',
             Source: {
                 connect: {
-                    name: 'tuoitre',
+                    name: 'TuoiTre',
                 },
             },
         },
@@ -30,7 +30,7 @@ export const categoriesSeed = async () => {
             name: 'Công nghệ',
             Source: {
                 connect: {
-                    name: 'tuoitre',
+                    name: 'TuoiTre',
                 },
             },
         },
@@ -38,7 +38,7 @@ export const categoriesSeed = async () => {
             name: 'Du lịch',
             Source: {
                 connect: {
-                    name: 'tuoitre',
+                    name: 'TuoiTre',
                 },
             },
         },
@@ -46,7 +46,7 @@ export const categoriesSeed = async () => {
             name: 'Văn hóa',
             Source: {
                 connect: {
-                    name: 'tuoitre',
+                    name: 'TuoiTre',
                 },
             },
         },
@@ -54,7 +54,7 @@ export const categoriesSeed = async () => {
             name: 'Giải trí',
             Source: {
                 connect: {
-                    name: 'tuoitre',
+                    name: 'TuoiTre',
                 },
             },
         },
@@ -62,7 +62,7 @@ export const categoriesSeed = async () => {
             name: 'Thể thao',
             Source: {
                 connect: {
-                    name: 'tuoitre',
+                    name: 'TuoiTre',
                 },
             },
         },
@@ -70,7 +70,7 @@ export const categoriesSeed = async () => {
             name: 'Giáo dục',
             Source: {
                 connect: {
-                    name: 'tuoitre',
+                    name: 'TuoiTre',
                 },
             },
         },
