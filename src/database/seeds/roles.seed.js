@@ -1,4 +1,4 @@
-const { prisma } = require('../index')
+import { prisma } from '../index'
 
 export const rolesSeed = async () => {
     const roles = [

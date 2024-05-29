@@ -1,4 +1,4 @@
-const { prisma } = require('../database//index')
+import { prisma } from '../database//index'
 
 export const createRoom = async (idUser) => {
     return await prisma.chatRoom.create({

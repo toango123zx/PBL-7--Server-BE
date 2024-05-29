@@ -1,12 +1,15 @@
-const express = require('express')
-var logger = require('morgan')
-var path = require('path')
-const route = require('./routers')
+import 'dotenv/config'
+import express from 'express'
+import logger from 'morgan'
+import { fileURLToPath } from 'url'
+import path, { dirname } from 'path'
+
+import route from './routers'
 
 const app = express()
 const port = 3000
 
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(dirname(fileURLToPath(import.meta.url)), 'views'))
 app.set('view engine', 'jade')
 
 // app.use(logger('dev'));
@@ -14,7 +17,7 @@ app.set('view engine', 'jade')
 app.use(logger('combined'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(dirname(fileURLToPath(import.meta.url)), 'public')))
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World!')
