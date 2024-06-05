@@ -24,8 +24,8 @@ model User {
   createdAt   DateTime @default(now())
   status      Boolean  @default(true)
   roleId      String
-
-  Role Role @relation(fields: [roleId], references: [id])
+  salt        String   @db.Char(32)
+  Role        Role     @relation(fields: [roleId], references: [id])
 
   FeadBack FeedBack[]
 
@@ -111,15 +111,21 @@ model News {
   @@map("news")
 }
 
+enum FeedBackStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 model FeedBack {
-  id        String   @id @default(cuid())
+  id        String         @id @default(cuid())
   content   String
-  createdAt DateTime @default(now())
-  status    Boolean  @default(true)
+  createdAt DateTime       @default(now())
   userId    String
-  User      User     @relation(fields: [userId], references: [id])
+  User      User           @relation(fields: [userId], references: [id])
   newsId    String
-  News      News     @relation(fields: [newsId], references: [id])
+  News      News           @relation(fields: [newsId], references: [id])
+  status    FeedBackStatus @default(PENDING)
 
   @@map("feedback")
 }

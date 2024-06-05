@@ -21,6 +21,7 @@ export const getUser = async (id_user, username, email) => {
                 name: true,
                 gender: true,
                 dateOfBirth: true,
+                salt: true,
                 Role: {
                     select: {
                         name: true,
