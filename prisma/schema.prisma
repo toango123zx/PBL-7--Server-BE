@@ -94,16 +94,19 @@ model RequestStatic {
 }
 
 model News {
-  id            String   @id @default(cuid())
+  id            String     @id @default(cuid())
   summary       String
-  Date          DateTime @default(now())
+  date          DateTime   @default(now())
   url           String
-  redirectCount Int      @default(0)
-  status        Boolean  @default(true)
+  redirectCount Int        @default(0)
+  status        Boolean    @default(true)
   categoryId    String
-  Category      Category @relation(fields: [categoryId], references: [id])
+  Category      Category   @relation(fields: [categoryId], references: [id])
+  createAt      DateTime   @default(now())
+  FeddBack      FeedBack[]
 
-  FeddBack FeedBack[]
+  modelVersion String
+  ModelVersion ModelVersion @relation(fields: [modelVersion], references: [name])
 
   @@map("news")
 }
@@ -121,16 +124,6 @@ model FeedBack {
   @@map("feedback")
 }
 
-model DataVersion {
-  id             String       @id @default(cuid())
-  date           DateTime     @default(now())
-  count          Int          @default(0)
-  modelVersionId String
-  ModelVersion   ModelVersion @relation(fields: [modelVersionId], references: [id])
-
-  @@map("data_version")
-}
-
 model ModelVersion {
   id     String   @id @default(cuid())
   name   String   @unique
@@ -138,9 +131,8 @@ model ModelVersion {
   rouge1 Float
   rouge2 Float
   rougeL Float
-  status Boolean  @default(true)
-
-  dataVersion DataVersion[]
+  status Boolean  @default(false)
+  News   News[]
 
   @@map("model_version")
 }
