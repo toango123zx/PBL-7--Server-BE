@@ -44,16 +44,26 @@ export const test = async (req, res, next) => {
 
 export const userRegister = async (req, res, next) => {
     const __user = req.user
-    console.log('🚀 ~ userRegister ~ __user:', __user)
-
-    if (!userService.createUser(__user)) {
-        return res.status(500).json({
-            position: 'insert prisma',
-            msg: 'Unable to add user table data to the database',
-        })
+    __user.Role = {
+        connect: {
+            name: 'user',
+        },
     }
+    try {
+        if (!(await userService.createUser(__user))) {
+            return res.status(500).json({
+                success: false,
+                msg: 'Unable to add user table data to the database',
+            })
+        }
+        return res.sendStatus(200)
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            msg: 'Error from the server',
+        })
 
-    return res.sendStatus(200)
+    }
 }
 
 export const seedData = async (req, res, next) => {
