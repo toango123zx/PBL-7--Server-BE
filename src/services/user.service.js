@@ -36,8 +36,8 @@ export const getUser = async (id_user, username, email) => {
                 },
             },
         })
-    } catch (e) {
-        return false
+    } catch (error) {
+        throw Error(error)
     }
 }
 
@@ -46,7 +46,7 @@ export const createUser = async (user) => {
         return await prisma.user.create({
             data: user,
         })
-    } catch (e) {
-        return false
+    } catch (error) {
+        throw Error(error)
     }
 }
