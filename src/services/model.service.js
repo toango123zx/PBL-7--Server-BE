@@ -11,6 +11,24 @@ export const getModel = async (name) => {
         throw Error(error)
     }
 }
+export const getModels = async () => {
+    try {
+        return await prisma.modelVersion.findMany({
+            select: {
+                id: true,
+                date: true,
+                name: true,
+                rouge1: true,
+                rouge2: true,
+                rougeL: true,
+                status: true
+            }
+        })
+    } catch (error) {
+        throw Error(error)
+    }
+}
+
 
 export const createModel = async (name, rouge1, rouge2, rougeL) => {
     try {
