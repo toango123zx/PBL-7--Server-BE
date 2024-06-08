@@ -1,11 +1,20 @@
 import { prisma } from '../database'
+import { dateUtils } from '../utils'
 
 export const getNews = async (categoryId, date) => {
     console.log(categoryId, date)
     try {
         return await prisma.news.findMany({
             where: {
-                AND: [{ categoryId: categoryId }, { Date: date }],
+                AND: [
+                    { categoryId: categoryId },
+                    {
+                        date: {
+                            gte: date,
+                            lt: dateUtils.getNextDate(date),
+                        },
+                    },
+                ],
             },
             orderBy: {
                 redirectCount: 'desc',
