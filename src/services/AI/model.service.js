@@ -21,3 +21,12 @@ export async function getAllVersion() {
 }
 
 export async function reloadVersion() {}
+
+export async function getSummary(text) {
+    try {
+        const response = await AxiosInterceptors.post('/playground', { text })
+        return response.data
+    } catch {
+        return false
+    }
+}

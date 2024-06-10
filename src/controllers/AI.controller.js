@@ -1,4 +1,5 @@
 import { AIService } from '../services'
+import { playgroundUtils } from '../utils'
 import { AxiosInterceptors } from '../utils/axios.interceptor'
 
 export const getAllModelVersions = async (req, res) => {
@@ -43,4 +44,20 @@ export const changeUsingVersion = async (req, res) => {
         success: false,
         message: 'Internal Server Error',
     })
+}
+
+export const usePlayground = async (req, res) => {
+    const { text } = req.body
+
+    const [valid, message] = playgroundUtils.validateInput(text)
+    if (!valid) return res.status(400).json({ success: false, message: message })
+
+    const data = await AIService.model.getSummary(text)
+
+    if (!data)
+        return res
+            .status(500)
+            .json({ success: false, message: 'Internal Server Error' })
+
+    return res.status(200).json({ success: true, data: data })
 }
