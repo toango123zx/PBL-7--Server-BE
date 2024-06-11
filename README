@@ -1,25 +1,32 @@
-## Install package project
+# BACK-END HỆ THỐNG TỔNG HỢP TIN TỨC
 
-```
-$ npm install
-```
+## Yêu cầu
 
-## Create DB
+Các yêu cầu được liệt kê trong package.json
 
-User `PrismaORM`
-Database `Postgresql`
+Ngoài ra còn cần các yêu cầu môi trường sau:
 
-```
-$ npx prisma db push
-```
+-   NodeJS: version >= 18.16.0
+-   PostgreSQL: latest version
 
-## Run app
+## Hướng dẫn cài đặt local
 
-```
-# development
-$ npm run start
+1. Cài đặt PostgreSQL
+2. Tạo database tên PBL7 trong PostgreSQL
+3. Tải dự án
+> git clone https://github.com/toango123zx/PBL-7-Server-BE
+4. Vào thư mục dự án
+5. Mở terminal và thực hiện các lệnh sau:
 
-# watch mode
-$ npm run start:dev
-``
-```
+-   Tải các node modules:
+    > npm i
+-   Khởi tạo database bằng Prisma ORM:
+    > npx prisma db push
+-   Khởi động server:
+    > npm start
+
+6. Seed data: tạo GET request đến http://localhost:8080/seed-data để tiến hành khởi tạo dữ liệu cho database
+
+có thể sử dụng browser, lệnh curl, postman hoặc các phương thức khác để tạo GET request
+
+## Server sẽ được khởi chạy trên cổng 8080 của localhost
