@@ -16,7 +16,7 @@ feedbackRouter.post(
     feedbackController.createFeedBack,
 )
 feedbackRouter.post(
-    '/accpect',
+    '/accept',
     authMiddleware.verifyToken,
     authMiddleware.checkAdminRole,
     feedbackController.acceptFeedBack,

@@ -100,6 +100,8 @@ model News {
   url           String
   redirectCount Int        @default(0)
   status        Boolean    @default(true)
+  title         String
+  orgSummary    String
   categoryId    String
   Category      Category   @relation(fields: [categoryId], references: [id])
   createAt      DateTime   @default(now())
