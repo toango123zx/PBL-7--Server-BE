@@ -6,6 +6,7 @@ import path, { dirname } from 'path'
 import cors from 'cors'
 
 import route from './routers'
+import { AI_SERVICE_BASE_URL, PRODUCTION_WEBAPP_URL } from './config/common.config'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -21,7 +22,12 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(dirname(fileURLToPath(import.meta.url)), 'public')))
 app.use(
     cors({
-        origin: ['http://localhost:3000'],
+        origin: [
+            'http://localhost:3000',
+            AI_SERVICE_BASE_URL,
+            PRODUCTION_WEBAPP_URL,
+        ],
+        credentials: true,
     }),
 )
 
