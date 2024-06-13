@@ -20,7 +20,14 @@ export async function getAllVersion() {
     }
 }
 
-export async function reloadVersion() {}
+export async function reloadVersion() {
+    try {
+        await AxiosInterceptors.get('/reload')
+        return true
+    } catch {
+        return false
+    }
+}
 
 export async function getSummary(text) {
     try {

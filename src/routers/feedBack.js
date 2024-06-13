@@ -28,4 +28,18 @@ feedbackRouter.post(
     feedbackController.rejectFeedBack,
 )
 
+feedbackRouter.get(
+    '/approved',
+    authMiddleware.verifyToken,
+    authMiddleware.checkAdminRole,
+    feedbackController.getApprovedFeedbacks,
+)
+
+feedbackRouter.get(
+    '/export',
+    authMiddleware.verifyToken,
+    authMiddleware.checkAdminRole,
+    feedbackController.exportFeedbackData,
+)
+
 export default feedbackRouter

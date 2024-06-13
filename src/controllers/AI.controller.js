@@ -61,3 +61,14 @@ export const usePlayground = async (req, res) => {
 
     return res.status(200).json({ success: true, data: data })
 }
+
+export const reloadVersions = async (req, res) => {
+    try {
+        await AIService.model.reloadVersion()
+        return res.status(200).json({ success: true })
+    } catch {
+        return res
+            .status(500)
+            .json({ success: false, message: 'Internal Server Error' })
+    }
+}

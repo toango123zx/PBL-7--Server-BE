@@ -1,4 +1,5 @@
 import { prisma } from '../database//index'
+import { AxiosInterceptors } from '../utils/axios.interceptor'
 
 export const getFeedBack = async (take, page) => {
     try {
@@ -67,5 +68,52 @@ export const updateStatusFeedBack = async (feedBackID, status) => {
         })
     } catch (error) {
         throw new Error(error)
+    }
+}
+
+export const getApprovedFeedbacks = async () => {
+    try {
+        return await prisma.feedBack.findMany({
+            select: {
+                id: true,
+                News: {
+                    select: {
+                        id: true,
+                        date: true,
+                        summary: true,
+                        url: true,
+                        status: true,
+                        title: true,
+                        Category: true,
+                    },
+                },
+                User: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        status: true,
+                    },
+                },
+                createdAt: true,
+                content: true,
+                status: true,
+            },
+            where: {
+                status: 'APPROVED',
+            },
+        })
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+export const exportCSV = async () => {
+    try {
+        const response = await AxiosInterceptors.get('/export')
+        if (response.success) return true
+        return false
+    } catch {
+        return false
     }
 }
